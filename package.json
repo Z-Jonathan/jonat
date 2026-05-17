@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "gen:types": "supabase gen types typescript --project-id YOUR_PROJECT_REF --schema public > types/database.ts"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
@@ -18,6 +19,8 @@
     "expo": "~52.0.0",
     "expo-asset": "~11.0.5",
     "expo-constants": "~17.0.8",
+    "expo-font": "~13.0.4",
+    "expo-image-picker": "~16.0.6",
     "expo-linking": "~7.0.5",
     "expo-location": "~18.0.10",
     "expo-router": "~4.0.22",
