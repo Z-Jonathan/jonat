@@ -191,6 +191,30 @@ export type Database = {
           },
         ];
       };
+      analytics_events: {
+        Row: {
+          id: string;
+          event: string;
+          props: Json | null;
+          user_id: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          event: string;
+          props?: Json | null;
+          user_id?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          event?: string;
+          props?: Json | null;
+          user_id?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {

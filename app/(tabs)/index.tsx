@@ -1,6 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
-import { type ReactNode, useState } from 'react';
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -12,14 +18,16 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AnimatedDealCard } from '../../components/AnimatedDealCard';
 import { CategoryChips } from '../../components/CategoryChips';
-import { DealCard } from '../../components/DealCard';
 import { RadiusPicker } from '../../components/RadiusPicker';
+import { DealListSkeleton } from '../../components/Skeleton';
 import { useLocation } from '../../hooks/useLocation';
 import { useNow } from '../../hooks/useNow';
+import { useRealtimeDeals } from '../../hooks/useRealtimeDeals';
 import { milesToMeters } from '../../lib/geo';
 import { useLocationStore } from '../../lib/locationStore';
-import { getNearbyDeals } from '../../lib/queries';
+import { getNearbyDeals, type NearbyDeal } from '../../lib/queries';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -52,6 +60,46 @@ export default function HomeScreen() {
       }),
   });
 
+  // Realtime-inserted deals are held locally and prepended; expired cards are
+  // hidden after their fade-out. Both reset whenever the server data is
+  // refreshed or the filters change (the fresh fetch already reflects them).
+  const [liveDeals, setLiveDeals] = useState<NearbyDeal[]>([]);
+  const [hiddenIds, setHiddenIds] = useState<Set<string>>(new Set());
+
+  const dataUpdatedAt = dealsQuery.dataUpdatedAt;
+  useEffect(() => {
+    setLiveDeals([]);
+    setHiddenIds(new Set());
+  }, [dataUpdatedAt, coords?.lat, coords?.lng, radiusMiles, categories]);
+
+  const handleNewDeal = useCallback((deal: NearbyDeal) => {
+    setLiveDeals((prev) =>
+      prev.some((d) => d.id === deal.id) ? prev : [deal, ...prev],
+    );
+  }, []);
+
+  useRealtimeDeals({ enabled: coords != null, onNewDeal: handleNewDeal });
+
+  const handleExpire = useCallback((id: string) => {
+    setHiddenIds((prev) => {
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+  }, []);
+
+  // Live deals first, then server results; de-duped by id, expired removed.
+  const feedData = useMemo(() => {
+    const seen = new Set<string>();
+    const merged: NearbyDeal[] = [];
+    for (const d of [...liveDeals, ...(dealsQuery.data ?? [])]) {
+      if (seen.has(d.id) || hiddenIds.has(d.id)) continue;
+      seen.add(d.id);
+      merged.push(d);
+    }
+    return merged;
+  }, [liveDeals, dealsQuery.data, hiddenIds]);
+
   return (
     <SafeAreaView edges={['top']} className="flex-1 bg-brand">
       <View className="gap-3 px-4 pb-3 pt-2">
@@ -72,10 +120,7 @@ export default function HomeScreen() {
           onManual={setManualLocation}
         />
       ) : dealsQuery.isPending ? (
-        <Centered>
-          <ActivityIndicator color="#ffffff" />
-          <Text className="mt-3 text-slate-300">Finding deals near you…</Text>
-        </Centered>
+        <DealListSkeleton />
       ) : dealsQuery.isError ? (
         <Centered>
           <Text className="text-center text-slate-300">
@@ -90,13 +135,14 @@ export default function HomeScreen() {
         </Centered>
       ) : (
         <FlatList
-          data={dealsQuery.data}
+          data={feedData}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ padding: 16, gap: 12 }}
           renderItem={({ item }) => (
-            <DealCard
+            <AnimatedDealCard
               deal={item}
               now={now}
+              onExpire={handleExpire}
               onPress={() =>
                 router.push({
                   pathname: '/deal/[id]',

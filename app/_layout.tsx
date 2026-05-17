@@ -5,6 +5,8 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { ErrorBoundary } from '../components/ErrorBoundary';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -19,11 +21,13 @@ const queryClient = new QueryClient({
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
-      <QueryClientProvider client={queryClient}>
-        <StatusBar style="light" />
-        <Stack screenOptions={{ headerShown: false }} />
-      </QueryClientProvider>
-    </SafeAreaProvider>
+    <ErrorBoundary>
+      <SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+          <StatusBar style="light" />
+          <Stack screenOptions={{ headerShown: false }} />
+        </QueryClientProvider>
+      </SafeAreaProvider>
+    </ErrorBoundary>
   );
 }

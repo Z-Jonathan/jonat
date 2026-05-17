@@ -1,9 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import type { ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import {
-  ActivityIndicator,
   Image,
   Linking,
   Pressable,
@@ -14,7 +13,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { DealDetailSkeleton } from '../../components/Skeleton';
 import { useNow } from '../../hooks/useNow';
+import { track } from '../../lib/analytics';
 import { formatDistanceMiles, haversineMeters } from '../../lib/geo';
 import { useLocationStore } from '../../lib/locationStore';
 import {
@@ -55,8 +56,12 @@ export default function DealDetailScreen() {
 
   const toggleSave = useMutation({
     mutationFn: async () => {
-      if (savedQuery.data) await unsaveDeal(id);
-      else await saveDeal(id);
+      if (savedQuery.data) {
+        await unsaveDeal(id);
+      } else {
+        await saveDeal(id);
+        track('deal_saved', { deal_id: id });
+      }
     },
     onMutate: async () => {
       await qc.cancelQueries({ queryKey: ['dealSaved', id] });
@@ -74,6 +79,11 @@ export default function DealDetailScreen() {
   });
 
   const deal = dealQuery.data;
+
+  // Fire once per viewed deal.
+  useEffect(() => {
+    if (deal?.id) track('deal_viewed', { deal_id: deal.id });
+  }, [deal?.id]);
 
   return (
     <SafeAreaView edges={['top']} className="flex-1 bg-white">
@@ -103,9 +113,7 @@ export default function DealDetailScreen() {
       </View>
 
       {dealQuery.isPending ? (
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator />
-        </View>
+        <DealDetailSkeleton />
       ) : !deal ? (
         <View className="flex-1 items-center justify-center px-8">
           <Text className="text-center text-slate-600">
@@ -157,6 +165,7 @@ function DealBody({
   const expires = new Date(deal.expires_at);
 
   const openDirections = () => {
+    track('directions_tapped', { deal_id: deal.id });
     const url = `https://www.google.com/maps/dir/?api=1&destination=${deal.store_lat},${deal.store_lng}`;
     void Linking.openURL(url);
   };
