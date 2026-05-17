@@ -33,7 +33,8 @@
           "locationAlwaysAndWhenInUsePermission": "Dibs uses your location to show deals expiring near you right now."
         }
       ],
-      "expo-asset"
+      "expo-asset",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
