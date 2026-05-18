@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import { DEAL_CATEGORIES, type DealCategory } from '../../constants/categories';
+import { track } from '../../lib/analytics';
 import { createDeal, uploadDealImage } from '../../lib/merchant';
 import type { Database } from '../../types/database';
 
@@ -93,7 +94,7 @@ export function DealForm({
       if (asset) {
         imageUrl = await uploadDealImage(asset.uri, asset.mimeType ?? null);
       }
-      await createDeal({
+      const dealId = await createDeal({
         storeId,
         title,
         discountType: discount,
@@ -101,6 +102,7 @@ export function DealForm({
         expiresAt: expiresAtISO(expiry, Number(customHours) || 3),
         imageUrl,
       });
+      track('merchant_posted', { store_id: storeId, deal_id: dealId });
       // Reset the fast path; keep store context.
       setTitle('');
       setAsset(null);
