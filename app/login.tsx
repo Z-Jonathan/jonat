@@ -43,6 +43,7 @@ export default function Login() {
         />
 
         <Pressable
+          onPress={() => router.replace('/home')}
           accessibilityRole="button"
           className="mt-4 items-center rounded bg-white py-4 active:scale-[0.98] active:opacity-90"
         >

@@ -2,15 +2,12 @@ import { useRouter } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-// Minimalist landing: one wordmark, one line of intent, two clear actions.
-// Lots of negative space; a single accent; no ornamentation.
 export default function Landing() {
   const router = useRouter();
 
   return (
     <SafeAreaView className="flex-1 bg-brand">
       <View className="flex-1 justify-between px-7 py-10">
-        {/* Brand block, optically centered in the upper space */}
         <View className="flex-1 justify-center">
           <Text className="text-5xl font-extrabold tracking-tight text-white">
             Dibs
@@ -20,7 +17,6 @@ export default function Landing() {
           </Text>
         </View>
 
-        {/* Actions */}
         <View className="gap-3">
           <Pressable
             onPress={() => router.push('/signup')}
