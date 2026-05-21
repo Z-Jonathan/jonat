@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-20T00:00:00Z",
+  "title": "Design System: Dibs",
+  "extensions": {
+    "colorMeta": {
+      "last-call-red": {
+        "role": "secondary",
+        "displayName": "Last-Call Red",
+        "canonical": "oklch(63% 0.22 25)",
+        "tonalRamp": [
+          "oklch(15% 0.10 25)",
+          "oklch(25% 0.14 25)",
+          "oklch(38% 0.18 25)",
+          "oklch(50% 0.21 25)",
+          "oklch(63% 0.22 25)",
+          "oklch(75% 0.18 25)",
+          "oklch(85% 0.10 25)",
+          "oklch(95% 0.025 25)"
+        ]
+      },
+      "twilight-amber": {
+        "role": "secondary",
+        "displayName": "Twilight Amber",
+        "canonical": "oklch(75% 0.18 70)",
+        "tonalRamp": [
+          "oklch(15% 0.05 70)",
+          "oklch(25% 0.09 70)",
+          "oklch(38% 0.14 70)",
+          "oklch(50% 0.17 70)",
+          "oklch(63% 0.18 70)",
+          "oklch(75% 0.18 70)",
+          "oklch(85% 0.12 70)",
+          "oklch(95% 0.03 70)"
+        ]
+      },
+      "after-hours-navy": {
+        "role": "neutral",
+        "displayName": "After-Hours Navy",
+        "canonical": "oklch(20% 0.04 260)",
+        "tonalRamp": [
+          "oklch(12% 0.04 260)",
+          "oklch(20% 0.04 260)",
+          "oklch(30% 0.04 260)",
+          "oklch(42% 0.035 260)",
+          "oklch(55% 0.03 260)",
+          "oklch(70% 0.02 260)",
+          "oklch(85% 0.012 260)",
+          "oklch(96% 0.005 260)"
+        ]
+      },
+      "menuboard-cream": {
+        "role": "primary",
+        "displayName": "Menuboard Cream",
+        "canonical": "oklch(95% 0.025 80)",
+        "tonalRamp": [
+          "oklch(25% 0.025 80)",
+          "oklch(38% 0.04 80)",
+          "oklch(50% 0.05 80)",
+          "oklch(62% 0.06 80)",
+          "oklch(75% 0.05 80)",
+          "oklch(85% 0.04 80)",
+          "oklch(95% 0.025 80)",
+          "oklch(99% 0.01 80)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Punchline",
+        "purpose": "Landing hero only. Heavy black weight at extreme scale, paired with a quiet font-light qualifier line above it."
+      },
+      "headline": {
+        "displayName": "Screen Heading",
+        "purpose": "Auth-flow screen titles (Welcome back, Create account)."
+      },
+      "title": {
+        "displayName": "Tab Heading",
+        "purpose": "Tab-screen and deal-detail titles. One tier below the auth heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default running text and button labels."
+      },
+      "label": {
+        "displayName": "Section Label",
+        "purpose": "Uppercase tracked label above sub-blocks of content (deal detail sections)."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "press-feedback-primary",
+        "value": "transform 120ms cubic-bezier(0.22, 1, 0.36, 1), opacity 120ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Filled primary CTA press: scale to 0.98 + opacity to 0.9."
+      },
+      {
+        "name": "press-feedback-secondary",
+        "value": "opacity 120ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Outlined / text-link press: opacity to 0.6. No scale."
+      }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Committed action on dark or light surface. Sharp 4px corners read as conviction; the only filled white element in the dark menuboard surface.",
+      "html": "<button class=\"ds-btn-primary\">Sign up</button>",
+      "css": ".ds-btn-primary { background: #ffffff; color: #0f172a; height: 56px; padding: 0 24px; border: none; border-radius: 4px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 16px; font-weight: 600; letter-spacing: normal; cursor: pointer; transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1), opacity 120ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { opacity: 0.95; } .ds-btn-primary:active { transform: scale(0.98); opacity: 0.9; } .ds-btn-primary:focus-visible { outline: 2px solid #f59e0b; outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined companion to the primary. Used as the second of two stacked CTAs on the landing and auth screens. Border, not fill, carries the shape.",
+      "html": "<button class=\"ds-btn-secondary\">Log in</button>",
+      "css": ".ds-btn-secondary { background: transparent; color: #ffffff; height: 56px; padding: 0 24px; border: 1px solid #334155; border-radius: 4px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: opacity 120ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-secondary:hover { opacity: 0.85; } .ds-btn-secondary:active { opacity: 0.6; } .ds-btn-secondary:focus-visible { outline: 2px solid #f59e0b; outline-offset: 3px; }"
+    },
+    {
+      "name": "Pill Button",
+      "kind": "button",
+      "refersTo": "button-pill",
+      "description": "Light tertiary action. Inline retries, share, save, location fallbacks. Rounded-full shape reads as a lighter touch than a committed CTA.",
+      "html": "<button class=\"ds-btn-pill\">Try again</button>",
+      "css": ".ds-btn-pill { background: #ffffff; color: #0f172a; padding: 8px 20px; border: none; border-radius: 9999px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1), opacity 120ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-pill:hover { opacity: 0.92; } .ds-btn-pill:active { transform: scale(0.98); opacity: 0.85; }"
+    },
+    {
+      "name": "Form Input",
+      "kind": "input",
+      "refersTo": "input-form",
+      "description": "Auth-screen text field. Tonal-layered surface (one step lighter than the dark canvas) marks it as interactive without a border. Error state adds a 1px Last-Call Red border.",
+      "html": "<div style=\"background: #0f172a; padding: 24px; max-width: 360px;\"><input type=\"email\" class=\"ds-input-form\" placeholder=\"you@example.com\" /></div>",
+      "css": ".ds-input-form { background: #1e293b; color: #ffffff; width: 100%; padding: 16px; border: none; border-radius: 8px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 16px; font-weight: 400; box-sizing: border-box; outline: none; } .ds-input-form::placeholder { color: #64748b; } .ds-input-form:focus { background: #232e44; } .ds-input-form[aria-invalid=\"true\"] { border: 1px solid #ef4444; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip-selected",
+      "description": "Multi-select category filter on the home feed. Selected = filled white. Unselected = transparent with a Streetlamp-Slate stroke. State difference is fill, not border weight.",
+      "html": "<div style=\"background: #0f172a; padding: 16px; display: flex; gap: 8px;\"><button class=\"ds-chip ds-chip-selected\">All</button><button class=\"ds-chip ds-chip-unselected\">Food</button><button class=\"ds-chip ds-chip-unselected\">Drinks</button></div>",
+      "css": ".ds-chip { padding: 6px 12px; border-radius: 9999px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: opacity 120ms cubic-bezier(0.22, 1, 0.36, 1); border: 1px solid transparent; } .ds-chip-selected { background: #ffffff; color: #0f172a; border-color: #ffffff; } .ds-chip-unselected { background: transparent; color: #cbd5e1; border-color: #475569; } .ds-chip:hover { opacity: 0.85; }"
+    },
+    {
+      "name": "Countdown Chip",
+      "kind": "custom",
+      "refersTo": "countdown-chip",
+      "description": "Signature component. Pill that carries time-left state on every deal surface. Fill + text color shift by urgency tier. The canonical use of the urgency palette; anywhere else it appears, double-check it isn't decorative.",
+      "html": "<div style=\"background: #ffffff; padding: 16px; display: flex; gap: 8px; flex-wrap: wrap;\"><span class=\"ds-countdown ds-countdown-urgent\">47m left</span><span class=\"ds-countdown ds-countdown-soon\">6h left</span><span class=\"ds-countdown ds-countdown-normal\">2d left</span><span class=\"ds-countdown ds-countdown-expired\">Expired</span></div>",
+      "css": ".ds-countdown { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 600; line-height: 1.2; } .ds-countdown-urgent { background: #ef4444; color: #ffffff; } .ds-countdown-soon { background: #f59e0b; color: #ffffff; } .ds-countdown-normal { background: #f1f5f9; color: #334155; } .ds-countdown-expired { background: #e2e8f0; color: #475569; }"
+    },
+    {
+      "name": "Deal Card",
+      "kind": "card",
+      "refersTo": "card-feed",
+      "description": "Feed card. White surface on the dark canvas; the card is the lit window onto one deal. Logo or initial letter on the left, content stack on the right with title, store, distance, and countdown chip. NOTE: the live code currently uses an absolutely-banned colored side-stripe (border-l-4) for urgency; this preview shows the intended refactor with a full hairline border + the countdown chip carrying urgency color.",
+      "html": "<div style=\"background: #0f172a; padding: 16px; max-width: 420px;\"><div class=\"ds-card-feed\"><div class=\"ds-card-feed__logo\">H</div><div class=\"ds-card-feed__body\"><div class=\"ds-card-feed__head\"><span class=\"ds-card-feed__title\">Half-off sourdough loaves</span><span class=\"ds-card-feed__cat\">Food</span></div><div class=\"ds-card-feed__store\">Henrietta's Bakery &middot; 0.4 mi</div><span class=\"ds-countdown ds-countdown-urgent\">47m left</span></div></div></div>",
+      "css": ".ds-card-feed { display: flex; gap: 12px; background: #ffffff; border: 1px solid #f1f5f9; border-radius: 16px; padding: 16px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; } .ds-card-feed__logo { width: 48px; height: 48px; border-radius: 9999px; background: #e2e8f0; color: #64748b; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; } .ds-card-feed__body { flex: 1; min-width: 0; } .ds-card-feed__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; } .ds-card-feed__title { font-size: 16px; font-weight: 700; color: #0f172a; line-height: 1.3; } .ds-card-feed__cat { background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 9999px; flex-shrink: 0; } .ds-card-feed__store { font-size: 14px; color: #64748b; margin-top: 2px; } .ds-card-feed .ds-countdown { margin-top: 10px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Late-Night Menuboard",
+    "overview": "Picture the storefront window of a wine bar at 7:14pm on a quiet weekday: deep navy sky, warm light spilling out, hand-set chalk on dark slate listing the night's specials. That's the visual surface Dibs lives on. The dark canvas (after-hours-navy) is the storefront glass. The cream display ink (menuboard-cream) is the chalk. The urgency palette (last-call-red, twilight-amber) is the live, lit-from-inside signal that something is happening now. Everything else gets out of the way.\n\nThe system is dual-surface by design. Nav-level screens (feed, search, saved, auth) sit on the dark menuboard. Content-detail screens (deal detail) flip to a light bone-paper surface, the way you'd pull a card off the board to read its fine print. This isn't a theme toggle. It's a deliberate two-room layout: the bar floor is dark and atmospheric; the booth where you read the menu is bright.\n\nWhat this system explicitly rejects: the Groupon coupon-clutter aesthetic; the Yelp / Foursquare identical-card-grid template; generic dark-mode SaaS landings; TikTok-style high-motion consumer-feed overlays. Restraint is the discipline; the type does the distinctive work.",
+    "keyCharacteristics": [
+      "Two-surface system (dark menuboard + light booth), one urgency palette, one brand-voice color.",
+      "Display type carries the brand; the system is typography-first, image-second.",
+      "Urgency colors are reserved for live time-pressure states. They are not the brand voice.",
+      "Flat by default. No shadows. Depth comes from surface contrast and tonal layering.",
+      "Mobile-native: thumb-zone CTAs, 44pt touch targets, motion limited to state feedback."
+    ],
+    "rules": [
+      {
+        "name": "The Urgency-is-Not-Voice Rule",
+        "body": "last-call-red and twilight-amber carry product state, not brand identity. They appear on countdown chips and time-left labels inside the app. They never appear on landing pages, marketing copy, or any screen whose job is to establish what Dibs is. Promoting them to brand accent collapses Dibs into the Groupon lane.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Room Rule",
+        "body": "Dark surfaces and light surfaces are explicit, not theme-toggles. Nav-level screens (where the user is moving through the app) sit on after-hours-navy. Content-detail screens (where the user is reading a single deal carefully) flip to white with slate-900 type. Don't half-room: no dark with light cards, no light with dark sidebars.",
+        "section": "colors"
+      },
+      {
+        "name": "The One-Family Rule",
+        "body": "The system runs entirely on the platform sans. Don't load custom fonts, don't introduce a serif companion, don't reach for monospace as developer-coded texture. Hierarchy comes from weight (300, 400, 700, 800, 900) and size, not from family.",
+        "section": "typography"
+      },
+      {
+        "name": "The Display Lockup Rule",
+        "body": "When the landing display shape is used, it must be a two-element lockup: a quiet qualifier (font-light, ≤ text-2xl) above a heavy punchline (font-black, ≥ text-7xl). Both lines in menuboard-cream. Never set a one-line display heading at this scale; the prosody of qualifier-then-punchline is the entire move.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Shadow Rule",
+        "body": "Shadows are forbidden across the system. If something needs to feel raised, lighten its surface relative to the background or add a hairline border.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Hairline-Not-Tinted-Surface Rule",
+        "body": "When separating regions inside one surface (an action bar from the content above it), use a 1px slate-100 (light) or slate-800 (dark) border. Don't tint the lower region a different shade; the tonal step reads as a missing component, not a separator.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use menuboard-cream (#f7eedd) only for display type on brand surfaces (landing hero, future marketing copy). Never as a chrome or state color.",
+      "Do keep urgency colors (last-call-red, twilight-amber) on countdown chips and time-left labels inside the product. The Urgency-is-Not-Voice Rule.",
+      "Do commit to the two-surface system: dark on nav-level, light on detail. No half-rooms.",
+      "Do set the landing display as a two-element lockup (quiet qualifier + heavy punchline). The prosody is the move.",
+      "Do use rounded (4px) for primary committed CTAs, rounded-full for light pill actions, rounded-lg/rounded-xl for inputs, rounded-2xl for content cards. Each radius means something; don't mix them by accident.",
+      "Do keep buttons at h-14 (56px) and touch targets ≥ 44pt. Add hitSlop on small text links.",
+      "Do stay flat. No box-shadow. Depth through surface contrast and hairline borders.",
+      "Do match active-state feedback to role: filled CTAs get scale-[0.98] opacity-90; secondary / text-link actions get opacity-60."
+    ],
+    "donts": [
+      "Don't promote the urgency palette to brand accent. text-soon on the landing's hero word, an amber kicker, a red 'limited time' headline; all violate PRODUCT.md Principle 3 and collapse Dibs into the Groupon lane.",
+      "Don't ship Groupon, LivingSocial, RetailMeNot coupon-clutter aesthetic: crossed-out prices, 'ENDS IN 2:14:32' red banner countdowns, alarm-coded scarcity. The countdown chip is the ENTIRE acceptable presence of countdowns.",
+      "Don't build identical-card grids of icon + heading + 4.3-star rating (the Yelp / Foursquare / TripAdvisor template). The deal feed uses one card pattern intentionally; don't multiply card variants of the same shape.",
+      "Don't drift into generic dark-mode SaaS landings: slate background + teal/purple accent + feature-grid below the fold.",
+      "Don't layer high-motion overlays, neon-on-dark gradients, autoplay video, or scroll-jacking.",
+      "Don't use border-left or border-right greater than 1px as a colored stripe on cards, list items, or alerts. Note: components/DealCard.tsx:42 currently violates this with border-l-4 urgency-coded; refactor to a full hairline border + a leading countdown chip carrying the urgency color instead.",
+      "Don't use gradient text (background-clip: text with a gradient). Solid colors only; emphasis through weight and size.",
+      "Don't use glassmorphism (backdrop-blurred translucent cards) as decoration. Rare and purposeful or nothing.",
+      "Don't introduce a second font family by reflex. The platform sans is the system.",
+      "Don't use em dashes anywhere in UX copy, comments, or commit messages. Use commas, colons, semicolons, periods, or parentheses.",
+      "Don't add box-shadow to anything. The No-Shadow Rule."
+    ]
+  }
+}

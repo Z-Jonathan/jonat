@@ -11,13 +11,6 @@ type Props = {
   onPress: () => void;
 };
 
-const ACCENT: Record<Urgency, string> = {
-  expired: 'border-l-slate-300',
-  urgent: 'border-l-urgent',
-  soon: 'border-l-soon',
-  normal: 'border-l-slate-200',
-};
-
 const COUNTDOWN_BG: Record<Urgency, string> = {
   expired: 'bg-slate-200',
   urgent: 'bg-urgent',
@@ -39,7 +32,7 @@ export function DealCard({ deal, now, onPress }: Props) {
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      className={`flex-row gap-3 rounded-2xl border-l-4 bg-white p-4 ${ACCENT[urgency]}`}
+      className="flex-row gap-3 rounded-2xl border border-slate-100 bg-white p-4"
     >
       {deal.store_logo_url ? (
         <Image
@@ -55,25 +48,7 @@ export function DealCard({ deal, now, onPress }: Props) {
       )}
 
       <View className="flex-1">
-        <View className="flex-row items-start justify-between gap-2">
-          <Text className="flex-1 text-base font-bold text-slate-900">
-            {deal.title}
-          </Text>
-          <View className="rounded-full bg-slate-100 px-2 py-0.5">
-            <Text className="text-[11px] font-medium text-slate-600">
-              {categoryLabel(deal.category)}
-            </Text>
-          </View>
-        </View>
-
-        <Text className="mt-0.5 text-sm text-slate-500" numberOfLines={1}>
-          {deal.store_name}
-          {deal.distance_meters != null
-            ? ` · ${formatDistanceMiles(deal.distance_meters)}`
-            : ''}
-        </Text>
-
-        <View className="mt-2 flex-row">
+        <View className="flex-row items-center gap-2">
           <View
             className={`rounded-full px-2.5 py-1 ${COUNTDOWN_BG[urgency]}`}
           >
@@ -83,7 +58,23 @@ export function DealCard({ deal, now, onPress }: Props) {
               {formatTimeLeft(deal.expires_at, now)}
             </Text>
           </View>
+          <View className="rounded-full bg-slate-100 px-2 py-0.5">
+            <Text className="text-[11px] font-medium text-slate-600">
+              {categoryLabel(deal.category)}
+            </Text>
+          </View>
         </View>
+
+        <Text className="mt-2 text-base font-bold text-slate-900">
+          {deal.title}
+        </Text>
+
+        <Text className="mt-0.5 text-sm text-slate-500" numberOfLines={1}>
+          {deal.store_name}
+          {deal.distance_meters != null
+            ? ` · ${formatDistanceMiles(deal.distance_meters)}`
+            : ''}
+        </Text>
       </View>
     </Pressable>
   );

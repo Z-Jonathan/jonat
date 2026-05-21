@@ -7,19 +7,20 @@ export default function Landing() {
 
   return (
     <SafeAreaView className="flex-1 bg-brand">
-      <View className="flex-1 justify-between px-7 pb-10 pt-10">
-        <View className="flex-1">
-          <Text className="text-xs font-bold tracking-[0.3em] text-soon">
-            DIBS
-          </Text>
-
-          <Text
+      <View className="flex-1 justify-between px-7 pb-10 pt-12">
+        <View className="flex-1 justify-center">
+          <View
+            accessible
             accessibilityRole="header"
-            className="mt-14 text-6xl font-black leading-[1.02] tracking-tight text-white"
+            accessibilityLabel="Walking-distance good"
           >
-            Local deals,{'\n'}before they’re{'\n'}
-            <Text className="text-soon">gone.</Text>
-          </Text>
+            <Text className="text-2xl font-light tracking-tight text-paper">
+              Walking-distance
+            </Text>
+            <Text className="text-8xl font-black leading-none tracking-tight text-paper">
+              good.
+            </Text>
+          </View>
 
           <Text className="mt-10 text-base leading-6 text-slate-400">
             Croissants this morning. Pints at five. Tacos at ten.
